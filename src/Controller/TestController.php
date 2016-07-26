@@ -7,6 +7,6 @@ class TestController extends BaseController
 {
     public function output($request, $response, $args)
     {
-        echo 'hello, flash';
+        return $this->webRpc->request('root');
     }
 }
