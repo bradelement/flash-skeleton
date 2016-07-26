@@ -17,7 +17,9 @@ if (ENV === Env::ONLINE) {
 
 define('LOG_ID', Helpers::uuid());
 
-$config = Configger::getConfig(ENV);
+$directFile = array('slim');
+$envFile = array('logger', 'mysql');
+$config = Configger::getConfig(ENV, $directFile, $envFile);
 
 $app = new \Slim\App(array('settings' => $config));
 require_once WEB_ROOT . '/src/Bootstrap/bootstrap.php';
