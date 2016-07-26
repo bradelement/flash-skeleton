@@ -2,7 +2,7 @@
 
 return array(
     'logger' => [
-        'name' => 'operator',
+        'name' => 'flash-skeleton',
         'path' => WEB_ROOT . '/logs/app.log',
     ],
 );
