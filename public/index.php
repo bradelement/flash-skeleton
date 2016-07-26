@@ -20,5 +20,5 @@ define('LOG_ID', Helpers::uuid());
 $config = Configger::getConfig(ENV);
 
 $app = new \Slim\App(array('settings' => $config));
-require_once WEB_ROOT '/src/Bootstrap/bootstrap.php';
+require_once WEB_ROOT . '/src/Bootstrap/bootstrap.php';
 $app->run();
