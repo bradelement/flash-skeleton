@@ -1,6 +1,7 @@
 {
     "name": "bradelement/flash-skeleton",
     "description": "simple skeleton of bradelement/flash",
+    "type": "project",
     "homepage": "https://github.com/bradelement/flash-skeleton",
     "license": "MIT",
     "keywords": [
