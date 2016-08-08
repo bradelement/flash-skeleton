@@ -27,7 +27,8 @@ class DependencyProvider extends IocBase
                 $validator->assert($param);
                 return array(true, '');
             } catch(NestedValidationException $exception) {
-                $message = $exception->getFullMessage();
+                $message = $exception->getMessages();
+                $message = implode(', ', $message);
                 return array(false, $message);
             }
         };
