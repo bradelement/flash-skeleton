@@ -2,6 +2,7 @@
 namespace App\Bootstrap;
 
 use Flash\Prototype\IocBase;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 class DependencyProvider extends IocBase
 {
@@ -17,5 +18,19 @@ class DependencyProvider extends IocBase
         $logger->pushHandler($handler);
 
         return $logger;
+    }
+
+    public function getValidateFunction()
+    {
+        $func = function($validator, $param) {
+            try {
+                $validator->assert($param);
+                return array(true, '');
+            } catch(NestedValidationException $exception) {
+                $message = $exception->getFullMessage();
+                return array(false, $message);
+            }
+        };
+        return $func;
     }
 }

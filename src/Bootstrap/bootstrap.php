@@ -14,7 +14,6 @@ $container = $app->getContainer();
 $container['provider'] = function ($c) {
     return new DependencyProvider($c);
 };
-
 $container['logger'] = function ($c) {
     return $c['provider']->getLogger();
 };
@@ -23,4 +22,8 @@ $container['view'] = function ($c) {
 };
 $container['webRpc'] = function ($c) {
     return new WebRpc($c);
+};
+//helper function
+$container['validate'] = function ($c) {
+    return $c['provider']->getValidateFunction();
 };
