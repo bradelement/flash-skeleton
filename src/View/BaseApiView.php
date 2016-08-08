@@ -20,7 +20,7 @@ class BaseApiView
     public function render($data)
     {
         $this->ret['data'] = $data;
-        return $this->response->withJson($this->ret);
+        return $this->output($this->ret);
     }
 
     public function error()
@@ -37,6 +37,11 @@ class BaseApiView
 
         $this->ret['errno']  = $conf[0];
         $this->ret['errmsg'] = call_user_func_array('sprintf', $args);
-        return $this->response->withJson($this->ret);
+        return $this->output($this->ret);
+    }
+
+    protected function output($data)
+    {
+        return $this->response->withJson($data);
     }
 }
