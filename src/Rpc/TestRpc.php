@@ -4,7 +4,7 @@ namespace App\Rpc;
 use Flash\Prototype\BaseRpc;
 use Flash\Env;
 
-class WebRpc extends BaseRpc
+class TestRpc extends BaseRpc
 {
     protected $base_uri = array(
         Env::DEV    => 'http://www.sina.com',

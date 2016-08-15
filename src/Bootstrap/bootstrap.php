@@ -2,7 +2,7 @@
 use App\Bootstrap\DependencyProvider;
 use App\Controller\TestController;
 
-use App\Rpc\WebRpc;
+use App\Rpc\TestRpc;
 use App\View\ApiView;
 use App\Middleware\Log;
 
@@ -20,8 +20,8 @@ $container['logger'] = function ($c) {
 $container['view'] = function ($c) {
     return new ApiView($c['response']);
 };
-$container['webRpc'] = function ($c) {
-    return new WebRpc($c);
+$container['testRpc'] = function ($c) {
+    return new TestRpc($c);
 };
 //helper function
 $container['validate'] = function ($c) {
