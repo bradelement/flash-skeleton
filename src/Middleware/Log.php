@@ -9,7 +9,7 @@ class Log extends BaseMiddleware
     public function __invoke($request, $response, $next)
     {
         $log_id = LOG_ID;
-        $req = json_encode($this->logServer($_SERVER));
+        $req = json_encode($this->logRequest($request));
         $this->logger->info("beginning receive req: LOG_ID($log_id) req($req)");
 
         $clock = new Clock();
@@ -22,13 +22,23 @@ class Log extends BaseMiddleware
         return $response;
     }
 
-    protected function logServer($param)
+    protected function logRequest($request)
     {
-        $ret = array();
-        $key = array('REQUEST_METHOD', 'REQUEST_URI', 'REMOTE_ADDR', 'REMOTE_PORT');
-        foreach ($key as $k) {
-            $ret[$k] = $param[$k];
+        $arr = array('curl', '-X');
+        $arr[] = $request->getMethod();
+        foreach ($request->getHeaders() as $name=>$values) {
+            foreach ($values as $value) {
+                $arr[] = '-H';
+                $arr[] = "'$name: $value'";
+            }
         }
-        return $ret;
+        $body = (string)$request->getBody();
+        if ($body) {
+            $arr[] = '-d';
+            $arr[] = "'$body'";
+        }
+        $uri = (string)$request->getUri();
+        $arr[] = "'$uri'";
+        return implode(' ', $arr);
     }
 }
