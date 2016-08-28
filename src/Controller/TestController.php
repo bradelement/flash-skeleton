@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use Respect\Validation\Validator as v;
-use Flash\Prototype\BaseController;
 
 class TestController extends BaseController
 {
@@ -12,7 +11,7 @@ class TestController extends BaseController
         $validator = v::key('a', v::stringType()->length(1,32))
             ->key('b', v::alnum());
 
-        list($ok, $message) = ($this->validate)($validator, $query);
+        list($ok, $message) = $this->validate($validator, $query);
         if (!$ok) {
             return $this->view->error('INPUT_ERROR', $message);
         }

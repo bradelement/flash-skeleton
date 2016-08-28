@@ -2,9 +2,9 @@
 namespace App\Middleware;
 
 use Flash\Utils\Clock;
-use Flash\Prototype\BaseMiddleware;
+use Flash\Prototype\IocBase;
 
-class Log extends BaseMiddleware
+class Log extends IocBase
 {
     public function __invoke($request, $response, $next)
     {
@@ -26,12 +26,7 @@ class Log extends BaseMiddleware
     {
         $arr = array('curl', '-X');
         $arr[] = $request->getMethod();
-        foreach ($request->getHeaders() as $name=>$values) {
-            foreach ($values as $value) {
-                $arr[] = '-H';
-                $arr[] = "'$name: $value'";
-            }
-        }
+
         $body = (string)$request->getBody();
         if ($body) {
             $arr[] = '-d';

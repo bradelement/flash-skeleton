@@ -23,7 +23,3 @@ $container['view'] = function ($c) {
 $container['testRpc'] = function ($c) {
     return new TestRpc($c);
 };
-//helper function
-$container['validate'] = function ($c) {
-    return $c['provider']->getValidateFunction();
-};
