@@ -9,7 +9,7 @@ class Log extends IocBase
     public function __invoke($request, $response, $next)
     {
         $log_id = LOG_ID;
-        $req = json_encode($this->logRequest($request));
+        $req = $this->logRequest($request);
         $this->logger->info("beginning receive req: LOG_ID($log_id) req($req)");
 
         $clock = new Clock();

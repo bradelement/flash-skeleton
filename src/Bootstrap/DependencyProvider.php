@@ -15,7 +15,10 @@ class DependencyProvider extends IocBase
 
         $logger = new \Monolog\Logger($settings['name']);
         $logger->pushHandler($handler);
-
+        $logger->pushProcessor(function ($record) {
+            $record['extra']['logid'] = LOG_ID;
+            return $record;
+        });
         return $logger;
     }
 }
