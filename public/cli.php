@@ -5,6 +5,7 @@ require WEB_ROOT . '/vendor/autoload.php';
 use Flash\Env;
 use Flash\Utils\Helpers;
 use Flash\Configger;
+use Slim\Http\Environment;
 
 define('ENV', Env::getEnv());
 if (ENV === Env::ONLINE) {
