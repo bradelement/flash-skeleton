@@ -6,14 +6,21 @@ use Respect\Validation\Exceptions\NestedValidationException;
 
 class BaseController extends IocBase
 {
-    public function validate($validator, $param) {
+    public function validate($rules, $source)
+    {
+        $param = array();
+        $currentKey = null;
         try {
-            $validator->assert($param);
-            return array(true, '');
+            foreach ($rules as $key=>$validator) {
+                $currentKey = $key;
+                $validator->assert($source[$key]);
+                $param[$key] = $source[$key];
+            }
+            return array(true, '', $param);
         } catch(NestedValidationException $exception) {
-            $message = $exception->getMessages();
-            $message = implode(', ', $message);
-            return array(false, $message);
+            $error = implode(', ', $exception->getMessages());
+            $message = "key[$currentKey] error[$error]";
+            return array(false, $message, $param);
         }
     }
 }

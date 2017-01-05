@@ -7,19 +7,16 @@ class TestController extends BaseController
 {
     public function output($request, $response, $args)
     {
-        $query = $request->getQueryParams();
-        $validator = v::key('a', v::stringType()->length(1,32))
-            ->key('b', v::alnum());
-
-        list($ok, $message) = $this->validate($validator, $query);
+        $rules = array(
+            'a' => v::stringType()->length(1, 12),
+            'b' => v::alnum(),
+        );
+        list($ok, $message, $param) = $this->validate($rules, $request->getQueryParams());
         if (!$ok) {
             return $this->view->error('INPUT_ERROR', $message);
         }
 
-        $ret = array();
-        for ($i=0; $i<4; $i++) {
-            $ret[] = array('data' => $i);
-        }
+        $ret = $param;
         return $this->view->render($ret);
     }
 }
