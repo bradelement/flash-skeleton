@@ -9,4 +9,4 @@ skeleton of flash
 
 1. `$ cd my-app && echo dev > env && cd public`
 2. `$ php -S 0.0.0.0:8888`
-3. Browse to http://localhost:8888
+3. Browse to http://localhost:8888/api/test
